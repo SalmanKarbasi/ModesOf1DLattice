@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# -o file   redirect standard output to file
+# -n #      number of processes
+# -J name   give the job a descriptive name
+
+#BSUB -o octave_output-%J.txt -n 1 -J Disorder
+
+# Always specify per-node memory requirements so that the scheduler doesn't
+# overload compute nodespolymer.  ( Use top on a compute node to observe mem use )
+#BSUB -R "rusage[mem=16000]"
+
+source ~/.bashrc
+module purge
+module load gcc-compiler/4.4.3-v1
+
+# Current Octave installation was built independent of pkgsrc
+# module load pkgsrc/1
+# Until we have a module for Octave or install it via pkgsrc...
+PATH=${PATH}:/sharedapps/CEAS/octave/bin/
+export PATH
+
+#openmpi_wrapper -x PATH 
+octave --silent --no-window-system Disorder.m

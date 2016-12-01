@@ -1,0 +1,35 @@
+function NameRef = RefindexGen_Grating(ggg)
+%clearvars -except ggg;
+N = zeros (5000,1); 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tt = 1; 
+Per = 80; % periodicity 
+for ii=500:Per:4500
+	dn = round(rand(1)*20);
+	tt = (Per/2)+dn;
+	N(ii:ii+tt) = 1.5;
+	N(ii+tt:ii+Per) = 1.5-1*10^-1;  
+end
+N(1:499) = 1.5-1*10^-1;
+N(4551:5000) = 1.5-1*10^-1;
+%N(1:2450) = 1.495; 
+%N(2451:2550)=1.5;
+%N(2551:5000) = 1.495; 
+%{
+%for ii =500:4500 
+%	N(ii) = N(ii) .* exp((ii-2500)./2000); 
+%end
+%}
+%for ii=500:4500
+%	if (N(ii)==1)	
+%		N(ii) = 1.52;
+%	else 
+%		N(ii) = 1.48; 
+%	end
+%end
+%plot(N,'Linewidth',2);
+Name1 = sprintf('%d',ggg);
+Name2 = strcat('RefIndex',Name1,'.dat');
+NameRef = Name2;
+save(Name2,'N','-ascii');
+end

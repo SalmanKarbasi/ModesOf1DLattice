@@ -1,0 +1,57 @@
+Sender: LSF System <lsfadmin@compute-1-32>
+Subject: Job 4166: <Disorder> Done
+
+Job <Disorder> was submitted from host <hd1> by user <karbasi2_a> in cluster <lsf>.
+Job was executed on host(s) <compute-1-32>, in queue <normal>, as user <karbasi2_a> in cluster <lsf>.
+</home/karbasi2_a> was used as the home directory.
+</home/karbasi2_a/Data/Salman/Octave/Disorder/Dn1E-1> was used as the working directory.
+Started at Wed May 29 17:38:19 2013
+Results reported at Wed May 29 20:18:48 2013
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+
+# -o file   redirect standard output to file
+# -n #      number of processes
+# -J name   give the job a descriptive name
+
+#BSUB -o octave_output-%J.txt -n 1 -J Disorder
+
+# Always specify per-node memory requirements so that the scheduler doesn't
+# overload compute nodespolymer.  ( Use top on a compute node to observe mem use )
+#BSUB -R "rusage[mem=16000]"
+
+source ~/.bashrc
+module purge
+module load gcc-compiler/4.4.3-v1
+
+# Current Octave installation was built independent of pkgsrc
+# module load pkgsrc/1
+# Until we have a module for Octave or install it via pkgsrc...
+PATH=${PATH}:/sharedapps/CEAS/octave/bin/
+export PATH
+
+#openmpi_wrapper -x PATH 
+octave --silent --no-window-system Disorder.m
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :   9620.26 sec.
+    Max Memory :      1367 MB
+    Max Swap   :      1619 MB
+
+    Max Processes  :         4
+    Max Threads    :         5
+
+The output (if any) follows:
+
+Warning: Removing '::' from path variable: PATH
+Warning: Removing '::' from path variable: PATH
+Warning: Removing '::' from path variable: PATH
